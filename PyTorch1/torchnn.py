@@ -63,8 +63,9 @@ if __name__ == "__main__":
         transforms.ToTensor()
     ])
 
-    img = Image.open('img_4.jpg')
-    img = img.convert('L') 
-    img_tensor = ToTensor()(img).unsqueeze(0).to('mps')
+    img = Image.open('img_5.jpg')
+    # img = img.convert('L') 
+    # img_tensor = ToTensor()(img).unsqueeze(0).to('mps')
+    img_tensor = transform(img).unsqueeze(0).to('mps')
 
-    print(torch.argmax(clf(img_tensor)))
+    print(f"The predict digit is: {torch.argmax(clf(img_tensor))}")
