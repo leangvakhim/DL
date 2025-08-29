@@ -58,6 +58,7 @@ if __name__ == "__main__":
         clf.load_state_dict(load(f))
     
     img = Image.open('img_4.jpg')
+    img = img.convert('L') 
     img_tensor = ToTensor()(img).unsqueeze(0).to('mps')
 
     print(torch.argmax(clf(img_tensor)))
