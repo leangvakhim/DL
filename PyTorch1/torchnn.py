@@ -4,7 +4,7 @@ from PIL import Image
 from torch import nn, save, load
 from torch.optim import Adam
 from torch.utils.data import DataLoader
-from torchvision import datasets
+from torchvision import datasets, transforms
 from torchvision.transforms import ToTensor
 
 # Get data
@@ -57,6 +57,12 @@ if __name__ == "__main__":
     with open('model_state.pt', 'rb') as f:
         clf.load_state_dict(load(f))
     
+    transform = transforms.Compose([
+        transforms.Resize((28, 28)),
+        transforms.Grayscale(num_output_channels=1),
+        transforms.ToTensor()
+    ])
+
     img = Image.open('img_4.jpg')
     img = img.convert('L') 
     img_tensor = ToTensor()(img).unsqueeze(0).to('mps')
